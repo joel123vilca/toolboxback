@@ -51,6 +51,23 @@ const getFilesInfo = async () => {
   }
 };
 
+const getFileByQueryparam = async (fileName) => {
+  try {
+    const fileResponse = await axios.get(`${API_URL}/file/${fileName}`, {
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+      },
+    });
+    const lines = await formatCsvLines(fileResponse.data);
+    return {
+      file: fileName,
+      lines: lines,
+    };
+  } catch (error) {
+    return {};
+  }
+};
+
 const formatCsvLines = async (csvData) => {
   const jsonArray = await csvUtils.fromString(csvData);
   const validLines = jsonArray.filter((line) => isValidLine(line));
@@ -76,4 +93,4 @@ const isValidLine = (line) => {
   );
 };
 
-module.exports = { getFilesInfo };
+module.exports = { getFilesInfo, getFileByQueryparam };
