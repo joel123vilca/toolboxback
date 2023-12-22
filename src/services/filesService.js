@@ -16,7 +16,6 @@ const getFilesInfo = async () => {
       fileListResponse.data && fileListResponse.data.files
         ? fileListResponse.data.files
         : [];
-
     const fileInfoPromises = files.map(async (fileName) => {
       try {
         const fileResponse = await axios.get(`${API_URL}/file/${fileName}`, {

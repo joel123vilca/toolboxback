@@ -18,3 +18,5 @@ const corsOptions = {
 app.listen(port, () => {
   console.log(`Start in port: ${port}`);
 });
+
+module.exports = app;
